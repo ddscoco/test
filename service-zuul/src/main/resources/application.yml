@@ -1,0 +1,26 @@
+eureka:
+ client:
+  serviceUrl:
+   defaultZone: http://peer1:8761/eureka/,http://peer2:8770/eureka/
+server:
+ port: 8769
+spring:
+ application:
+  name: service-zuul
+
+
+zuul:
+ retryable: true
+ routes:
+  api-a:
+   path: /api-a/**
+   serviceId: service-miya
+  api-b:
+   path: /api-b/**
+   serviceId: service-feign
+
+ribbon:
+   ConnectTimeout: 1000
+   ReadTimeout: 1000
+   MaxAutoRetriesNextServer: 1
+   MaxAutoRetries: 1

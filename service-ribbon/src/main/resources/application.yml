@@ -1,0 +1,32 @@
+eureka:
+ client:
+  serviceUrl:
+   defaultZone: http://peer1:8761/eureka/,http://peer2:8770/eureka/
+server:
+ port: 8764
+spring:
+ application:
+  name: service-ribbon
+
+ribbon:
+ MaxAutoRetriesNextServer: 2
+ MaxAutoRetries: 1
+ OkToRetryOnAllOperations: true
+
+hystrix:
+ command:
+  default:
+   circuitBreaker:
+    requestVolumeThreshold: 20
+    errorThresholdPercentage: 35
+    sleepWindowInMilliseconds: 2000
+  execution:
+    isolation:
+   thread:
+     timeoutInMilliseconds: 1000
+
+ management:
+  endpoints:
+   web:
+    exposure:
+     include: hystrix.stream

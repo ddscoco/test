@@ -1,0 +1,15 @@
+spring:
+ application:
+  name: turbin
+
+server:
+ port: 5001
+
+eureka:
+ client:
+   service-url:
+     defaultZone: http://peer1:8761/eureka,http://peer2:8770/eureka
+
+turbine:
+  app-config: service-feign
+  cluster-name-expression: new String("default")

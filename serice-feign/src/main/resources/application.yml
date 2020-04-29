@@ -1,0 +1,38 @@
+eureka:
+ client:
+  serviceUrl:
+   defaultZone: http://peer1:8761/eureka/,http://peer2:8770/eureka/
+server:
+ port: 8765
+spring:
+ application:
+  name: service-feign
+feign:
+ hystrix:
+  enabled: true
+
+ribbon:
+ ConnectTimeout: 1000
+ ReadTimeout: 1000
+
+service-hi:
+ ribbon:
+   ConnectTimeout: 500
+   ReadTimeout: 1000
+   MaxAutoRetriesNextServer: 2
+   MaxAutoRetries: 1
+
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+             timeoutInMilliseconds: 500
+
+ management:
+   endpoints:
+     web:
+       exposure:
+         include: hystrix.stream
